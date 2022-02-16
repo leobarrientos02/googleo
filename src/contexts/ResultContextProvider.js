@@ -24,9 +24,19 @@ export const ResultContextProvider = ({ children }) => {
         });
 
         const data = await response.json();
+        
+        // console.log({type, data});
+        
+        if(type.includes('/news')){
+            //console.log({data});
+            setResults(data.entries);
+        } else if( type.includes('/images')){
+            setResults(data.image_results);
+        } else {
+            setResults(data.results);
+        }
 
-        setResults(data);
-        console.log(data);
+        // setResults(data);
         setIsLoading(false);
     }
     return (

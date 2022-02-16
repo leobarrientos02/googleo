@@ -25,7 +25,7 @@ export const Results = () => {
     case '/search':
         return (
           <div className='flex flex-wrap justify-between space-y-6 sm:px-56'>
-            {results?.results?.map(({ link, title, description }, index) => (
+            {results?.map(({ link, title, description }, index) => (
                 <div 
                   key={index}
                   className='md:w-2/5 w-full'
@@ -45,7 +45,7 @@ export const Results = () => {
     case '/images':
         return (
           <div className='flex flex-wrap justify-center items-center'>
-            {results?.image_results?.map(({ image, link: { href, title }, index }) => (
+            {results?.map(({ image, link: { href, title }, index }) => (
               <a href={href} key={index} target="_blank" rel='noreferrer' className='sm:p-3 p-5'>
                 <img src={image?.src} alt={title} loading="lazy" />
                 <p className='w-36 break-words text-sm mt-2'>
@@ -56,7 +56,34 @@ export const Results = () => {
           </div>
         )
     case '/news':
-          return 'SEARCH'; 
+          return (
+            <div className='flex flex-wrap justify-between space-y-6 sm:px-56 items-center'>
+              {results?.map(({ links, id, source, title, published  }) => (
+                <div 
+                  key={id}
+                  className='md:w-2/5 w-full'
+                >
+                  <a href={links?.[0].href} target="_blank" rel='noreferrer' title={source?.href} className='hover:underline'>
+                    <p className='text-lg dark:text-blue-300 text-blue-700'>
+                      {title}
+                    </p>
+                    <div className='flex gap-4'>
+                      <a href={source?.href} target="_blank" rel='noreferrer'>
+                        {source?.href}
+                      </a>
+                    </div>
+                    <div className='flex gap-4 text-xs text-gray-500 justify-between'>
+                      <p>
+                        {published.substring(0,17)}
+                      </p>
+                      <p>{source?.title}</p>                    
+                    </div>
+                    
+                  </a>
+                </div>
+            ))}
+          </div>
+          )
     case '/videos':
           return 'SEARCH';      
     default:
