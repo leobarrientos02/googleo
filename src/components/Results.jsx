@@ -67,19 +67,18 @@ export const Results = () => {
                     <p className='text-lg dark:text-blue-300 text-blue-700'>
                       {title}
                     </p>
-                    <div className='flex gap-4'>
-                      <a href={source?.href} target="_blank" rel='noreferrer'>
-                        {source?.href}
-                      </a>
-                    </div>
-                    <div className='flex gap-4 text-xs text-gray-500 justify-between'>
-                      <p>
-                        {published.substring(0,17)}
-                      </p>
-                      <p>{source?.title}</p>                    
-                    </div>
-                    
                   </a>
+                  <div className='flex gap-4'>
+                    <a href={source?.href} target="_blank" rel='noreferrer'>
+                      {source?.href}
+                    </a>
+                  </div>
+                  <div className='flex gap-4 text-xs text-gray-500 justify-between'>
+                    <p>
+                      {published?.substring(0,17)}
+                    </p>
+                    <p>{source?.title}</p>                    
+                  </div>
                 </div>
             ))}
           </div>
@@ -87,9 +86,11 @@ export const Results = () => {
     case '/videos':
           return (
             <div className='flex flex-wrap'>
-              {results.map((video, index) => (
+              {results?.map((video, index) => (
                 <div key={index} className='p-2'>
-                  <ReactPlayer url={video.additional_links[0].href} controls width="355px" height='200px' />
+                  {video?.additional_links?.[0]?.href && (
+                    <ReactPlayer url={video.additional_links?.[0].href} controls width="355px" height='200px' />
+                  )}
                 </div>
               ))}
             </div>
